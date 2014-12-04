@@ -7,5 +7,5 @@ rpm -Uvh http://sourceforge.net/projects/scons/files/scons/2.3.4/scons-2.3.4-1.n
 yum -y install centos-release-SCL
 yum -y install python27
 scl enable python27 "easy_install pip"
-scl enable python27 ~/mc-installer/step2.sh
+#scl enable python27 
 
