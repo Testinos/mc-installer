@@ -22,7 +22,7 @@ if [ ! -f "ragel-6.9.tar.gz" ]
 	wget http://www.colm.net/files/ragel/ragel-6.9.tar.gz
 fi
 rpmbuild -bb ~/rpmbuild/SPECS/autoconf.spec
-rpmbuild -bb ~/rpmbuild/SPECS/double-conversion.spec
+#rpmbuild -bb ~/rpmbuild/SPECS/double-conversion.spec
 rpmbuild -bb ~/rpmbuild/SPECS/gflags.spec
 rpmbuild -bb  ~/rpmbuild/SPECS/ragel.spec
 cd ~/rpmbuild/RPMS/x86_64/
