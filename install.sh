@@ -3,28 +3,43 @@ yum -y groupinstall 'Development Tools'
 cd /etc/yum.repos.d
 wget http://www.hop5.in/yum/el6/hop5.repo 
 yum -y update 
-yum -y install unzip bzip2-devel libtool libevent-devel libcap-devel openssl-devel bison flex snappy-devel numactl-devel cyrus-sasl-devel boost-devel
+yum -y install unzip bzip2-devel libtool libevent-devel libcap-devel openssl-devel bison flex snappy-devel numactl-devel cyrus-sasl-devel boost-devel python-setuptools cmake
 rpm -Uvh http://sourceforge.net/projects/scons/files/scons/2.3.4/scons-2.3.4-1.noarch.rpm
+yum -y install centos-release-SCL
+yum -y install python27
+scl enable python27 "easy_install pip"
+scl enable python27 bash
 mkdir -p ~/rpmbuild/{BUILD,RPMS,SOURCES,SPECS,SRPMS}
 cd ~
 git clone https://github.com/Testinos/master.git
 cp master/spec/* ~/rpmbuild/SPECS
 cp master/patch/* ~/rpmbuild/SOURCES
 cd ~/rpmbuild/SOURCES
+if [ ! -f "autoconf-2.69.tar.xz" ]
+then
 wget http://ftp.gnu.org.ua/gnu/autoconf/autoconf-2.69.tar.xz
+fi
+if [ ! -f "gflags-2.1.1.tar.gz" ]
+then
 wget http://github.com/schuhschuh/gflags/archive/v2.1.1/gflags-2.1.1.tar.gz
+fi
+if [ ! -f "glog-0.3.3.tar.gz" ]
+then
 wget https://google-glog.googlecode.com/files/glog-0.3.3.tar.gz
+fi
+if [ ! -f "ragel-6.9.tar.gz" ]
+then
 wget http://www.colm.net/files/ragel/ragel-6.9.tar.gz
+fi
+if [ ! -f "double-conversion-master.tar.gz" ]
+then
 wget https://codeload.github.com/floitsch/double-conversion/tar.gz/master -O double-conversion-master.tar.gz
+fi
 rpmbuild -bb ~/rpmbuild/SPECS/* 
 cd ~/rpmbuild/RPMS/x86_64/
 rpm -ivh double-conversion-devel-master-1.el6.x86_64.rpm double-conversion-master-1.el6.x86_64.rpm gflags-2.1.1-6.el6.x86_64.rpm gflags-devel-2.1.1-6.el6.x86_64.rpm glog-0.3.3-8.el6.x86_64.rpm glog-devel-0.3.3-8.el6.x86_64.rpm ragel-6.9-2.3.x86_64.rpm 
 rpm -Uvh ~/rpmbuild/RPMS/noarch/autoconf-2.69-12.2.noarch.rpm
 echo '/usr/local/lib' >> /etc/ld.so.conf.d/libs.conf && ldconfig
-yum -y install centos-release-SCL
-yum -y install python27
-scl enable python27 "easy_install pip"
-scl enable python27 bash
 cd /opt && git clone https://github.com/facebook/folly.git
 cd /opt/folly/folly/ && autoreconf -ivf
 ./configure
