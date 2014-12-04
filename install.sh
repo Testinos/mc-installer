@@ -1,7 +1,6 @@
 #!/bin/bash
 yum -y groupinstall 'Development Tools'
-cd /etc/yum.repos.d
-wget http://www.hop5.in/yum/el6/hop5.repo 
+wget http://www.hop5.in/yum/el6/hop5.repo -P /etc/yum.repos.d/
 yum -y update 
 yum -y install unzip bzip2-devel libtool libevent-devel libcap-devel openssl-devel bison flex snappy-devel numactl-devel cyrus-sasl-devel boost-devel python-setuptools cmake
 rpm -Uvh http://sourceforge.net/projects/scons/files/scons/2.3.4/scons-2.3.4-1.noarch.rpm
@@ -11,9 +10,9 @@ scl enable python27 "easy_install pip"
 scl enable python27 bash
 mkdir -p ~/rpmbuild/{BUILD,RPMS,SOURCES,SPECS,SRPMS}
 cd ~
-git clone https://github.com/Testinos/master.git
-cp master/spec/* ~/rpmbuild/SPECS
-cp master/patch/* ~/rpmbuild/SOURCES
+git clone https://github.com/Testinos/mc-installer.git
+cp mc-installer/spec/* ~/rpmbuild/SPECS
+cp mc-installer/patch/* ~/rpmbuild/SOURCES
 cd ~/rpmbuild/SOURCES
 if [ ! -f "autoconf-2.69.tar.xz" ]
 then
