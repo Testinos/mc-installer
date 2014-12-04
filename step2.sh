@@ -22,11 +22,10 @@ if [ ! -f "ragel-6.9.tar.gz" ]
 	wget http://www.colm.net/files/ragel/ragel-6.9.tar.gz
 fi
 rpmbuild -bb ~/rpmbuild/SPECS/autoconf.spec
-#rpmbuild -bb ~/rpmbuild/SPECS/double-conversion.spec
 rpmbuild -bb ~/rpmbuild/SPECS/gflags.spec
 rpmbuild -bb  ~/rpmbuild/SPECS/ragel.spec
 cd ~/rpmbuild/RPMS/x86_64/
-rpm -ivh double-conversion-devel-master-1.el6.x86_64.rpm double-conversion-master-1.el6.x86_64.rpm gflags-2.1.1-6.el6.x86_64.rpm gflags-devel-2.1.1-6.el6.x86_64.rpm ragel-6.9-2.3.x86_64.rpm 
+rpm -ivh gflags-2.1.1-6.el6.x86_64.rpm gflags-devel-2.1.1-6.el6.x86_64.rpm ragel-6.9-2.3.x86_64.rpm 
 rpm -Uvh ~/rpmbuild/RPMS/noarch/autoconf-2.69-12.2.noarch.rpm
 rpmbuild -bb ~/rpmbuild/SPECS/glog.spec
 rpm -ivh glog-0.3.3-8.el6.x86_64.rpm glog-devel-0.3.3-8.el6.x86_64.rpm
@@ -41,7 +40,7 @@ cd /opt && git clone https://github.com/facebook/folly.git
 export LD_LIBRARY_PATH="/opt/folly/folly/lib:$LD_LIBRARY_PATH"
 export LD_RUN_PATH="/opt/folly/folly/lib"
 export LDFLAGS="-L/opt/folly/folly/lib -L/opt/double-conversion -L/usr/local/lib -ldl"
-export CPPFLAGS="-I/opt/folly/folly/include"
+export CPPFLAGS="-I/opt/folly/folly/include -I/opt/double-conversion"
 cd /opt/folly/folly/ && autoreconf -ivf
 ./configure
 make && make install
@@ -57,7 +56,8 @@ ln -sf thrifty.h "/opt/fbthrift/thrift/compiler/thrifty.hh"
 export LD_LIBRARY_PATH="/opt/fbthrift/thrift/lib:$LD_LIBRARY_PATH"
 export LD_RUN_PATH="/opt/fbthrift/thrift/lib"
 export LDFLAGS="-L/opt/fbthrift/thrift/lib -L/usr/local/lib"
-export CPPFLAGS="-I/opt/fbthrift/thrift/include -I/opt/fbthrift/thrift/include/python2.7 -I/opt/folly"
+export CPPFLAGS="-I/opt/fbthrift/thrift/include -I/opt/fbthrift/thrift/include/python2.7 -I/opt/folly -I/opt/double-conversion"
+echo "/usr/local/lib/" >> /etc/ld.so.conf.d/gcc-4.9.1.conf && ldconfig
 autoreconf -ivf
 ./configure --enable-boostthreads
 cd /opt/fbthrift/thrift/compiler && make
