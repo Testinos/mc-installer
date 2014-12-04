@@ -2,8 +2,8 @@
 yum -y groupinstall 'Development Tools'
 cd /etc/yum.repos.d
 wget http://www.hop5.in/yum/el6/hop5.repo 
-yum update 
-yum -y install unzip bzip2-devel libtool libevent-devel libcap-devel openssl-devel bison flex snappy-devel numactl-devel cyrus-sasl-devel
+yum -y update 
+yum -y install unzip bzip2-devel libtool libevent-devel libcap-devel openssl-devel bison flex snappy-devel numactl-devel cyrus-sasl-devel boost-devel
 mkdir -p ~/rpmbuild/{BUILD,RPMS,SOURCES,SPECS,SRPMS}
 cd ~
 git clone https://github.com/Testinos/master.git
