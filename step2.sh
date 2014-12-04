@@ -65,6 +65,7 @@ cd /opt/fbthrift/thrift/lib/thrift && make
 cd /opt/fbthrift/thrift/lib/cpp2 && make gen-cpp2/Sasl_types.h
 cd /opt/fbthrift/thrift/lib/cpp2/test && make gen-cpp2/Service_constants.cpp
 cd /opt/fbthrift/thrift && make && make install
+ldconfig
 
 cd /opt && git clone https://github.com/facebook/mcrouter.git
 cd mcrouter/mcrouter
