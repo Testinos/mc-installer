@@ -57,7 +57,6 @@ export LD_LIBRARY_PATH="/opt/fbthrift/thrift/lib:$LD_LIBRARY_PATH"
 export LD_RUN_PATH="/opt/fbthrift/thrift/lib"
 export LDFLAGS="-L/opt/fbthrift/thrift/lib -L/usr/local/lib"
 export CPPFLAGS="-I/opt/fbthrift/thrift/include -I/opt/fbthrift/thrift/include/python2.7 -I/opt/folly -I/opt/double-conversion"
-echo "/usr/local/lib/" >> /etc/ld.so.conf.d/gcc-4.9.1.conf && ldconfig
 autoreconf -ivf
 ./configure --enable-boostthreads
 cd /opt/fbthrift/thrift/compiler && make
