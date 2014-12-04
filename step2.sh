@@ -49,7 +49,6 @@ cd /opt/folly/folly/test
 wget https://googletest.googlecode.com/files/gtest-1.6.0.zip
 unzip gtest-1.6.0.zip
 
-
 cd /opt && git clone https://github.com/facebook/fbthrift.git
 cd fbthrift/thrift
 ln -sf thrifty.h "/opt/fbthrift/thrift/compiler/thrifty.hh"
