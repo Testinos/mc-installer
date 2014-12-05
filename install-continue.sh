@@ -1,8 +1,8 @@
 #!/bin/bash
-mkdir -p ~/rpmbuild/{BUILD,RPMS,SOURCES,SPECS,SRPMS}
-cp ~/mc-installer/spec/* ~/rpmbuild/SPECS
-cp ~/mc-installer/patch/* ~/rpmbuild/SOURCES
-cd ~/rpmbuild/SOURCES
+mkdir -p $pwd/rpmbuild/{BUILD,RPMS,SOURCES,SPECS,SRPMS}
+cp $pwd/mc-installer/spec/* $pwd/rpmbuild/SPECS
+cp $pwd/mc-installer/patch/* $pwd/rpmbuild/SOURCES
+cd $pwd/rpmbuild/SOURCES
 if [ ! -f "autoconf-2.69.tar.xz" ]
 	then
 	wget http://ftp.gnu.org.ua/gnu/autoconf/autoconf-2.69.tar.xz
@@ -19,15 +19,15 @@ if [ ! -f "ragel-6.9.tar.gz" ]
 	then
 	wget http://www.colm.net/files/ragel/ragel-6.9.tar.gz
 fi
-rpmbuild -bb ~/rpmbuild/SPECS/autoconf.spec
-rpmbuild -bb ~/rpmbuild/SPECS/gflags.spec
-rpmbuild -bb  ~/rpmbuild/SPECS/ragel.spec
-cd ~/rpmbuild/RPMS/x86_64/
+rpmbuild -bb $pwd/rpmbuild/SPECS/autoconf.spec
+rpmbuild -bb $pwd/rpmbuild/SPECS/gflags.spec
+rpmbuild -bb  $pwd/rpmbuild/SPECS/ragel.spec
+cd $pwd/rpmbuild/RPMS/x86_64/
 rpm -ivh gflags-2.1.1-6.el6.x86_64.rpm gflags-devel-2.1.1-6.el6.x86_64.rpm ragel-6.9-2.3.x86_64.rpm 
-rpm -Uvh ~/rpmbuild/RPMS/noarch/autoconf-2.69-12.2.noarch.rpm
-rpmbuild -bb ~/rpmbuild/SPECS/glog.spec
+rpm -Uvh $pwd/rpmbuild/RPMS/noarch/autoconf-2.69-12.2.noarch.rpm
+rpmbuild -bb $pwd/rpmbuild/SPECS/glog.spec
 rpm -ivh glog-0.3.3-8.el6.x86_64.rpm glog-devel-0.3.3-8.el6.x86_64.rpm
-cd /opt 
+cd /opt
 git clone https://github.com/floitsch/double-conversion.git
 cd double-conversion && scons install 
 ln -sf src double-conversion && scons -f SConstruct

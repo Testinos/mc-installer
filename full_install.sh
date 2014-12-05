@@ -1,5 +1,6 @@
 #!/bin/bash
 pwd=`pwd`
+export $pwd
 if [ ! -f "/etc/yum.repos.d/hop5.repo" ]
         then
 wget http://www.hop5.in/yum/el6/hop5.repo -P /etc/yum.repos.d/
