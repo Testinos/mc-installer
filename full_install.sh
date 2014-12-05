@@ -1,5 +1,4 @@
 #!/bin/bash
-export pwd=`pwd`
 if [ ! -f "/etc/yum.repos.d/hop5.repo" ]
         then
 wget http://www.hop5.in/yum/el6/hop5.repo -P /etc/yum.repos.d/
@@ -10,5 +9,5 @@ yum -y install centos-release-SCL
 yum -y update
 yum -y install python27
 scl enable python27 "easy_install pip"
-scl enable python27 $pwd/mc-installer/install-continue.sh
+scl enable python27 ~/mc-installer/install-continue.sh
 
