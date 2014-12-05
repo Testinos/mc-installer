@@ -1,9 +1,7 @@
 #!/bin/bash
 mkdir -p ~/rpmbuild/{BUILD,RPMS,SOURCES,SPECS,SRPMS}
-cd ~
-git clone https://github.com/Testinos/mc-installer.git
-cp mc-installer/spec/* ~/rpmbuild/SPECS
-cp mc-installer/patch/* ~/rpmbuild/SOURCES
+cp ~/mc-installer/spec/* ~/rpmbuild/SPECS
+cp ~/mc-installer/patch/* ~/rpmbuild/SOURCES
 cd ~/rpmbuild/SOURCES
 if [ ! -f "autoconf-2.69.tar.xz" ]
 	then
